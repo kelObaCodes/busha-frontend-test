@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from "./components/shared/Modal";
 import styled from 'styled-components';
+import NavBar from './components/NavBar';
 
 const MainWrapper = styled.div`
   max-width: 1200px;
@@ -55,6 +56,7 @@ const App: React.FC = () => {
   return (
     <>
       <NavbarWrapper>
+      <NavBar />
       </NavbarWrapper>
 
       <MainWrapper>
