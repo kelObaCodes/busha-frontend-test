@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from "./components/shared/Modal";
 import styled from 'styled-components';
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
 import AccountList from './components/Account-list';
+import AddAccount from './components/Add-wallet';
+import Notification from './components/shared/Notifications';
 
 const MainWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   height: 100vh;
+  padding: 1rem;
 `;
 
 const NavbarWrapper = styled.div`
@@ -49,14 +52,30 @@ const AccountListWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+    padding: 0;
   }
 `;
 
+interface walletInterface {
+  name: string;
+  currency: string;
+}
+
+
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [walletData, setWalletData] = useState<walletInterface>();
+  const [showNotification, setShowNotification] = useState(false);
+
   const handleAddAccountClick = () => {
     setIsModalOpen(true);
   };
+
+  useEffect(()=>{
+    if(walletData?.name) {
+      setShowNotification(true); 
+    }
+  },[walletData?.name])
 
   return (
     <>
@@ -71,12 +90,17 @@ const App: React.FC = () => {
           </SidebarWrapper>
 
           <AccountListWrapper>
-          <AccountList onAddAccountClick={handleAddAccountClick} />
-
-            <Modal isOpen={isModalOpen}>
+          <AccountList onAddAccountClick={handleAddAccountClick} walletData={walletData} />
+          <Modal isOpen={isModalOpen}>
+              <AddAccount onClose={() => setIsModalOpen(false)}  addWallet={setWalletData}/>
             </Modal>
           </AccountListWrapper>
-       
+          {showNotification && (
+        <Notification
+          message={`${walletData?.name} Wallet added successfully!`}
+          onClose={() => setShowNotification(false)}
+        />
+      )}
         </ContentWrapper>
 
       </MainWrapper>

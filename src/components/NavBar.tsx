@@ -26,6 +26,10 @@ const ProfileName = styled.span`
     font-size: 1rem;
     font-weight: bold;
     color: #333;
+
+    @media (max-width: 767px) {
+        font-size: .6rem;
+  }
 `;
 
 const CircularDiv = styled.div`
