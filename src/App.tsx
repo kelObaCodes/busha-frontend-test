@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from "./components/shared/Modal";
 import styled from 'styled-components';
 import NavBar from './components/NavBar';
+import SideBar from './components/SideBar';
 
 const MainWrapper = styled.div`
   max-width: 1200px;
@@ -62,6 +63,7 @@ const App: React.FC = () => {
       <MainWrapper>
         <ContentWrapper>
           <SidebarWrapper>
+          <SideBar/>
           </SidebarWrapper>
 
           <AccountListWrapper>
