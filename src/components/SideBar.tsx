@@ -26,6 +26,7 @@ const MenuItem = styled.li<{ isActive: boolean }>`
   border-radius: 5px;
   cursor: pointer;
   background-color: ${(props) => (props.isActive ? '#f6f7fa' : 'transparent')};
+  font-weight: ${(props) => (props.isActive ? 600 : 400)};
   
   &:hover {
     background-color: #ddd;

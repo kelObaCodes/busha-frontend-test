@@ -3,6 +3,7 @@ import Modal from "./components/shared/Modal";
 import styled from 'styled-components';
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
+import AccountList from './components/Account-list';
 
 const MainWrapper = styled.div`
   max-width: 1200px;
@@ -53,6 +54,9 @@ const AccountListWrapper = styled.div`
 
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleAddAccountClick = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -67,6 +71,8 @@ const App: React.FC = () => {
           </SidebarWrapper>
 
           <AccountListWrapper>
+          <AccountList onAddAccountClick={handleAddAccountClick} />
+
             <Modal isOpen={isModalOpen}>
             </Modal>
           </AccountListWrapper>
