@@ -173,7 +173,7 @@ const AccountList: React.FC<AccountListProps> = ({
     const [accounts, setAccounts] = useState<Account[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [validImageUrls, setValidImageUrls] = useState<{
+    const [validImageUrls,] = useState<{
         [key: string]: boolean;
     }>({});
 

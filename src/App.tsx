@@ -12,6 +12,7 @@ const MainWrapper = styled.div`
   margin: 0 auto;
   height: 100vh;
   padding: 1rem;
+
 `;
 
 const NavbarWrapper = styled.div`
@@ -22,6 +23,9 @@ const NavbarWrapper = styled.div`
   box-sizing: border-box; 
   text-align: center;
   font-size: 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 3;
 `;
 
 const ContentWrapper = styled.div`

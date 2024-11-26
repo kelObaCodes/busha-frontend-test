@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const SidebarWrapper = styled.div.attrs<{ isOpen: boolean }>((props) => ({
@@ -12,6 +12,8 @@ const SidebarWrapper = styled.div.attrs<{ isOpen: boolean }>((props) => ({
   @media (max-width: 768px) {
     position: absolute;
     left: ${(props) => (props.isOpen ? '0' : '-250px')};
+    top: 73px;
+    width: 250px;
   }
 `;
 
@@ -34,24 +36,25 @@ const MenuItem = styled.li<{ isActive: boolean }>`
 `;
 
 const ToggleButton = styled.button`
-  background-color: #333;
-  color: white;
   border: none;
   padding: 0.8rem;
   cursor: pointer;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+  position: fixed;
+  top: 0.7rem;
+  left: 0;
   display: none;
-  
+  background: none;
+
   @media (max-width: 768px) {
     display: block;
+    z-index: 4;
   }
 `;
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(0); // Track active menu item
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -61,19 +64,38 @@ const SideBar = () => {
     setActiveMenu(index); // Set the active menu item
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+      setIsOpen(false); // Close sidebar if clicking outside of it
+    }
+  };
+
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    if (isOpen && isMobile) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <>
       <ToggleButton onClick={toggleSidebar}>
-        {isOpen ? 'Close Menu' : 'Open Menu'}
+        <span className="material-symbols-outlined">menu</span>
       </ToggleButton>
 
-      <SidebarWrapper isOpen={isOpen}>
+      <SidebarWrapper ref={sidebarRef} isOpen={isOpen}>
         <Menu>
           <MenuItem isActive={activeMenu === 0} onClick={() => handleMenuClick(0)}>
-           Wallets
+            Wallets
           </MenuItem>
           <MenuItem isActive={activeMenu === 1} onClick={() => handleMenuClick(1)}>
-           Prices
+            Prices
           </MenuItem>
           <MenuItem isActive={activeMenu === 2} onClick={() => handleMenuClick(2)}>
             Peer2Peer

@@ -14,6 +14,15 @@ const NavbarWrapper = styled.div`
 const Logo = styled.div`
     font-size: 1.5rem;
     font-weight: bold;
+
+    @media (max-width: 767px) {
+        img {
+        height: 20px;
+        margin-left: 30px;
+        
+    }
+  }
+   
 `;
 
 const ProfileSection = styled.div`
