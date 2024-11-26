@@ -205,7 +205,7 @@ const AccountList: React.FC<AccountListProps> = ({
                 return prevAccounts;
             });
         }
-    }, [accounts.length, walletData?.name]);
+    }, [accounts.length, walletData]);
 
     const fetchAccounts = async (): Promise<void> => {
         setLoading(true);
