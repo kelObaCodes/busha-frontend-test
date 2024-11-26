@@ -11,15 +11,15 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './components/theme/theme';
 import { useTheme } from './components/theme/themeContext';
 
-const WrapperCOver = styled.div`
+const WrapperCover = styled.div`
   background-color: ${(props) => props.theme.background};
+height: 100vh;
 `;
 
 const MainWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
-  height: 100vh;
   padding: 1rem;
   background-color: ${(props) => props.theme.background};
 `;
@@ -120,7 +120,7 @@ const App: React.FC = () => {
         <NavbarWrapper>
           <NavBar />
         </NavbarWrapper>
-        <WrapperCOver>
+        <WrapperCover>
           <MainWrapper>
             <ContentWrapper>
               <SidebarWrapper>
@@ -152,7 +152,7 @@ const App: React.FC = () => {
             </ThemeSwitchWrapper>
 
           </MainWrapper>
-        </WrapperCOver>
+        </WrapperCover>
       </StyledThemeProvider>
     </>
   );
