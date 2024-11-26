@@ -19,11 +19,12 @@ const Heading = styled.h2`
     font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
+    color: ${(props) => props.theme.text};
 `;
 
 const AddAccountButton = styled.button`
     background-color: transparent;
-    color: #000;
+    color: ${(props) => props.theme.text};
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
@@ -58,15 +59,15 @@ const CardsGrid = styled.section`
 `;
 
 const Card = styled.article`
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 1rem;
     border-radius: 10px;
     cursor: pointer;
     display: flex;
-    background: #000;
+    background: ${(props) => props.theme.walletCard};
     flex-direction: column;
     align-items: flex-start;
-    box-shadow: 0px 10px 20px 0px #8a8a8a80;
+    box-shadow: 0px 10px 20px 0px ${(props) => props.theme.walletBoxShadow};
     transition: 0.9s;
     height: 150px;
 
@@ -83,6 +84,7 @@ const CardRow = styled.div`
     align-items: center;
     margin-bottom: 1rem;
     color: #fff;
+
 `;
 
 const CardIcon = styled.div`
@@ -197,13 +199,13 @@ const AccountList: React.FC<AccountListProps> = ({
             };
 
             setAccounts((prevAccounts) => {
-                if (!prevAccounts.find((acc) => acc.name === newAccount.name)) {
+                if (!prevAccounts?.find((acc) => acc.name === newAccount.name)) {
                     return [...prevAccounts, newAccount];
                 }
                 return prevAccounts;
             });
         }
-    }, [accounts.length, walletData]);
+    }, [accounts.length, walletData?.name]);
 
     const fetchAccounts = async (): Promise<void> => {
         setLoading(true);
@@ -251,11 +253,7 @@ const AccountList: React.FC<AccountListProps> = ({
             <CardsGrid>
                 {accounts.map((account) => (
                     <Card
-                        key={account.id}
-                        onClick={() =>
-                            console.log("Account Clicked", account.id)
-                        }
-                    >
+                        key={account.id}>
                         <CardRow>
                             <CardIcon>
                                 {validImageUrls[account.id] ? (

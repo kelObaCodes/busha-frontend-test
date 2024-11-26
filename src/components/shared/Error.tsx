@@ -29,13 +29,14 @@ const Message = styled.p`
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  color: #000;
+  color: ${(props) => props.theme.notificationText};
 `;
 
 const RetryButton = styled.button`
   display: block;
   background-color: #000;
   color: white;
+  
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 40px;
