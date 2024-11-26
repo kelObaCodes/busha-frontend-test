@@ -13,7 +13,7 @@ const SidebarWrapper = styled.div.attrs<{ isOpen: boolean }>((props) => ({
     @media (max-width: 768px) {
         position: absolute;
         left: ${(props) => (props.isOpen ? "0" : "-250px")};
-        top: 73px;
+        top: 0;
         width: 250px;
     }
 `;
